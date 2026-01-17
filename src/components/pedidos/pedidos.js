@@ -28,7 +28,7 @@ function App() {
         confirmButtonColor: '#22c55e',
       }).then(() => {
         // 👇 Redirige automáticamente a /productos
-        window.location.href = "/productos";
+        window.location.href = "/movies";
       });
     }
   };

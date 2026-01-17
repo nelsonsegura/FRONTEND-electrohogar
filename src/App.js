@@ -15,6 +15,7 @@ import Descuentos from './components/descuentos/descuentos';
 import Pedidos from './components/pedidos/pedidos';
 import Bienvenido from './components/bienvenido/bienvenido';
 import Bienvenidos from './components/bienvenidos/bienvenidos';
+import { Regadmin } from "./components/regadmin/Regadmin";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/pedidos" element={<Pedidos />} />
           <Route path="/bienvenido" element={<Bienvenido />} />
           <Route path="/bienvenidos" element={<Bienvenidos />} />
+          <Route path="/regadmin" element={<Regadmin />} />
         </Routes>
         <Footer />
       </Router>
