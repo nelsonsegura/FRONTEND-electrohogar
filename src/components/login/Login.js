@@ -43,7 +43,7 @@ export const Login = () => {
         if (response.role === "client") {
           navigate("/movies");
         } else {
-          navigate("/dashboard-admin");
+          navigate("/movies/create");
         }
 
       } else {

@@ -17,6 +17,11 @@ import Bienvenido from './components/bienvenido/bienvenido';
 import Bienvenidos from './components/bienvenidos/bienvenidos';
 import { Regadmin } from "./components/regadmin/Regadmin";
 
+
+import { MovieCreate } from "./components/movie/MovieCreate";
+import { MovieEdit } from "./components/movie/MovieEdit";
+import { AdminRoute } from "./routes/AdminRoute";
+
 function App() {
   return (
     <div className="App">
@@ -35,6 +40,24 @@ function App() {
           <Route path="/bienvenido" element={<Bienvenido />} />
           <Route path="/bienvenidos" element={<Bienvenidos />} />
           <Route path="/regadmin" element={<Regadmin />} />
+
+          <Route
+            path="/movies/create"
+            element={
+              <AdminRoute>
+                <MovieCreate />
+              </AdminRoute>
+            }
+          />
+
+          <Route
+            path="/movies/edit/:id"
+            element={
+              <AdminRoute>
+                <MovieEdit />
+              </AdminRoute>
+            }
+          />
         </Routes>
         <Footer />
       </Router>

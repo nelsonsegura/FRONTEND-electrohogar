@@ -1,12 +1,13 @@
-import { Link } from "react-router-dom";
-
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import "./Movie.css";
 import { API_URL, getToken, showMessage } from "../../util/Util";
+import { isAdmin } from "../../util/auth"; // ✅ NUEVO
 
 export const Movie = () => {
   const params = useParams();
+  const navigate = useNavigate();
+
   const [movieId, setMovieId] = useState("");
   const [movie, setMovie] = useState({});
   const [score, setScore] = useState([]);
@@ -15,7 +16,6 @@ export const Movie = () => {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
-    //getMovies();
     setMovieId(params.id);
     getMovie();
     setScoreData();
@@ -29,6 +29,7 @@ export const Movie = () => {
     setMovie(response);
   };
 
+  // ================= SCORE =================
   const checkScore = async () => {
     const requestData = {
       method: "GET",
@@ -37,12 +38,13 @@ export const Movie = () => {
         Authorization: getToken(),
       },
     };
+
     let response = await fetch(
       API_URL + "score/check/" + params.id,
       requestData
     );
     response = await response.json();
-    //const response = { id: "6399cfadc9e9a77c999e8306", score: 6 };
+
     if (response.id != null && response.score != null) {
       setScoreSelected(response.score);
       setScoreId(response.id);
@@ -71,15 +73,15 @@ export const Movie = () => {
 
     let response = await fetch(API_URL + "score/" + scoreId, requestData);
     response = await response.json();
-    const title = "";
+
     let icon = "warning";
     let confirmButtonText = "Reintentar";
     if (response.status === true) {
       icon = "success";
       confirmButtonText = "OK";
     }
-    const message = response.message;
-    showMessage(title, message, icon, confirmButtonText);
+
+    showMessage("", response.message, icon, confirmButtonText);
   };
 
   const setScoreData = () => {
@@ -97,18 +99,34 @@ export const Movie = () => {
   };
 
   const checkIsInList = () => {
-    //consumir el api
-    //validar si está activa
     setIsActive(true);
   };
 
-  const handleAddList = async () => {
-    //comunicación con backend, enviandoles el id de esta pelicula y enviandole el token
-    //backend debería tomar ese id pelicula, buscar esa pelicula en la bd, después el usuarios
-    //debería guardar en una entidad playlist->id cliente, id pelicula, la fecha,state =>1 activo, 2=>oculto
-    //mensaje indicanole al usuario que ya se agregó
-  };
+  // ================= ADMIN ACTIONS =================
 
+  const handleDelete = async () => {
+    const confirm = window.confirm(
+      "¿Estás seguro de eliminar este producto?"
+    );
+    if (!confirm) return;
+
+    const requestData = {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: getToken(),
+      },
+    };
+
+    let response = await fetch(API_URL + "movie/" + params.id, requestData);
+
+    if (response.ok) {
+      showMessage("Éxito", "Producto eliminado", "success", "OK");
+      navigate("/movies");
+    } else {
+      showMessage("Error", "No se pudo eliminar", "error", "Reintentar");
+    }
+  };
 
   return (
     <div className="movie-container">
@@ -126,10 +144,28 @@ export const Movie = () => {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       ></iframe>
+
       <div className="main-container">
         <div className="content">
           <h1>{movie.name}</h1>
           <p>{movie.description}</p>
+
+          {/* ================= BOTONES ADMIN ================= */}
+          {isAdmin() && (
+            <div className="mb-3">
+              <Link
+                to={`/movies/edit/${movie.id}`}
+                className="btn btn-warning me-2"
+              >
+                Editar
+              </Link>
+
+              <button className="btn btn-danger" onClick={handleDelete}>
+                Eliminar
+              </button>
+            </div>
+          )}
+
           <div className="staff-list">
             {movie.staffList && movie.staffList.length > 0
               ? movie.staffList.map((staff, idx) => (
@@ -139,25 +175,25 @@ export const Movie = () => {
               ))
               : ""}
           </div>
+
           <div className="category-list">
             {movie.categories && movie.categories.length > 0
               ? movie.categories.map((staff, idx) => (
-                <p key={idx}>
-                  {staff.name} {staff.lastName} {staff.rol}
-                </p>
+                <p key={idx}>{staff.name}</p>
               ))
               : ""}
           </div>
-          <div className="mt-4">
-            <Link to="/pedidos" className="mr-5 hover:text-gray-900">
-              <button
-                type="button"
-                className="inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white sm:w-auto"
-              >
-                COMPRAR
-              </button>
-            </Link>
-          </div>
+
+          {/* ================= CLIENTE ================= */}
+          {!isAdmin() && (
+            <div className="mt-4">
+              <Link to="/pedidos">
+                <button className="inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white sm:w-auto">
+                  COMPRAR
+                </button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>

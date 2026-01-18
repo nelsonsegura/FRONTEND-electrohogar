@@ -24,4 +24,14 @@ export const showMessage = (title = "", message, icon, confirmButtonText) => {
   });
 };
 
+
+export const isAdmin = () => {
+  const authData = localStorage.getItem("authData");
+  if (!authData) return false;
+
+  const user = JSON.parse(authData);
+  return user.role === "admin";
+};
+
+
 export const API_URL = process.env.REACT_APP_BACK_URL;
