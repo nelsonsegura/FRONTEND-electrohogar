@@ -53,16 +53,13 @@ export const TopMenu = () => {
 
               {/* 🔴 SOLO ADMIN VE ESTO */}
               {isAdmin() && (
-                <NavDropdown title="Administración" id="admin-nav-dropdown">
-                  <NavDropdown.Item as={Link} to="/movies/create">
-                    Crear producto
-                  </NavDropdown.Item>
-
-                  <NavDropdown.Item as={Link} to="/movies">
-                    Administrar productos
+                <NavDropdown title="Administración">
+                  <NavDropdown.Item as={Link} to="/admin/movies">
+                    Listado Productos
                   </NavDropdown.Item>
                 </NavDropdown>
               )}
+
 
               <Nav.Link onClick={logOut}>LOG OUT</Nav.Link>
 

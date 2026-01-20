@@ -32,11 +32,11 @@ export const MovieCreate = () => {
 
             const data = await response.json();
 
-            if (data.status === true || response.ok) {
-                showMessage("Éxito", "Producto creado correctamente", "success", "OK");
-                navigate("/movies");
+            if (response.ok) {
+                showMessage("OK", "Producto creado", "success", "OK");
+                navigate("/admin/movies");
             } else {
-                showMessage("Error", data.message || "Error al crear", "error");
+                showMessage("Error", data.message || "Error", "error");
             }
         } catch (error) {
             showMessage("Error", "Error de conexión", "error");
@@ -44,37 +44,37 @@ export const MovieCreate = () => {
     };
 
     return (
-        <div className="container">
+        <div className="container mt-4">
             <h2>Crear producto</h2>
 
             <form onSubmit={handleSubmit}>
                 <input
-                    name="name"
-                    placeholder="Nombre del producto"
                     className="form-control mb-2"
+                    name="name"
+                    placeholder="Nombre"
                     onChange={handleChange}
                     required
                 />
 
                 <textarea
+                    className="form-control mb-2"
                     name="description"
                     placeholder="Descripción"
-                    className="form-control mb-2"
                     onChange={handleChange}
                     required
                 />
 
                 <input
-                    name="trailerLink"
-                    placeholder="Link video (YouTube)"
                     className="form-control mb-2"
+                    name="trailerLink"
+                    placeholder="Link video"
                     onChange={handleChange}
                 />
 
                 <input
+                    className="form-control mb-3"
                     name="imageLink"
                     placeholder="Link imagen"
-                    className="form-control mb-3"
                     onChange={handleChange}
                     required
                 />

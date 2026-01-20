@@ -72,6 +72,7 @@ export const MovieEdit = () => {
                 <input
                     name="name"
                     value={formData.name}
+                    placeholder="Nombre del producto"
                     className="form-control mb-2"
                     onChange={handleChange}
                     required
@@ -80,6 +81,7 @@ export const MovieEdit = () => {
                 <textarea
                     name="description"
                     value={formData.description}
+                    placeholder="Descripción"
                     className="form-control mb-2"
                     onChange={handleChange}
                     required
@@ -88,6 +90,7 @@ export const MovieEdit = () => {
                 <input
                     name="trailerLink"
                     value={formData.trailerLink}
+                    placeholder="Link video (YouTube)"
                     className="form-control mb-2"
                     onChange={handleChange}
                 />
@@ -95,6 +98,7 @@ export const MovieEdit = () => {
                 <input
                     name="imageLink"
                     value={formData.imageLink}
+                    placeholder="Link imagen"
                     className="form-control mb-3"
                     onChange={handleChange}
                     required

@@ -20,6 +20,7 @@ import { Regadmin } from "./components/regadmin/Regadmin";
 
 import { MovieCreate } from "./components/movie/MovieCreate";
 import { MovieEdit } from "./components/movie/MovieEdit";
+import { MovieAdminList } from "./components/movie/MovieAdminList";
 import { AdminRoute } from "./routes/AdminRoute";
 
 function App() {
@@ -42,6 +43,15 @@ function App() {
           <Route path="/regadmin" element={<Regadmin />} />
 
           <Route
+            path="/admin/movies"
+            element={
+              <AdminRoute>
+                <MovieAdminList />
+              </AdminRoute>
+            }
+          />
+
+          <Route
             path="/movies/create"
             element={
               <AdminRoute>
@@ -58,6 +68,7 @@ function App() {
               </AdminRoute>
             }
           />
+
         </Routes>
         <Footer />
       </Router>
