@@ -23,6 +23,8 @@ import { MovieEdit } from "./components/movie/MovieEdit";
 import { MovieAdminList } from "./components/movie/MovieAdminList";
 import { AdminRoute } from "./routes/AdminRoute";
 
+import { AdminDashboard } from "./components/admin/AdminDashboard";
+
 function App() {
   return (
     <div className="App">
@@ -65,6 +67,15 @@ function App() {
             element={
               <AdminRoute>
                 <MovieEdit />
+              </AdminRoute>
+            }
+          />
+
+          <Route
+            path="/admin/dashboard"
+            element={
+              <AdminRoute>
+                <AdminDashboard />
               </AdminRoute>
             }
           />

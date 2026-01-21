@@ -57,7 +57,11 @@ export const TopMenu = () => {
                   <NavDropdown.Item as={Link} to="/admin/movies">
                     Listado Productos
                   </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/admin/dashboard">
+                    Dashboard
+                  </NavDropdown.Item>
                 </NavDropdown>
+
               )}
 
 
