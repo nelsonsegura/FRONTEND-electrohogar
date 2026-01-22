@@ -51,6 +51,11 @@ export const TopMenu = () => {
                 Contactos
               </Nav.Link>
 
+              <Nav.Link as={Link} to="/cart">
+                🛒 Carrito
+              </Nav.Link>
+
+
               {/* 🔴 SOLO ADMIN VE ESTO */}
               {isAdmin() && (
                 <NavDropdown title="Administración">

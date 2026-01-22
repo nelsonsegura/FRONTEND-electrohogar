@@ -4,6 +4,8 @@ import "./Movie.css";
 import { API_URL, getToken, showMessage } from "../../util/Util";
 import { isAdmin } from "../../util/auth"; // ✅ NUEVO
 
+import { addToCart } from "../../util/cart";
+
 export const Movie = () => {
   const params = useParams();
   const navigate = useNavigate();
@@ -128,6 +130,13 @@ export const Movie = () => {
     }
   };
 
+
+  const handleAddCart = () => {
+    addToCart(movie);
+    showMessage("Agregado", "Producto agregado al carrito", "success", "OK");
+  };
+
+
   return (
     <div className="movie-container">
       <iframe
@@ -191,6 +200,14 @@ export const Movie = () => {
                 <button className="inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white sm:w-auto">
                   COMPRAR
                 </button>
+
+                <button
+                  className="btn btn-primary mt-2"
+                  onClick={handleAddCart}
+                >
+                  Agregar al carrito
+                </button>
+
               </Link>
             </div>
           )}

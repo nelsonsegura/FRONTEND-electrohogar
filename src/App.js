@@ -31,6 +31,9 @@ import { AdminAdmins } from "./components/admin/AdminAdmins";
 
 import { AdminOrders } from "./components/admin/AdminOrders";
 
+import { Cart } from "./components/cart/Cart";
+
+
 function App() {
   return (
     <div className="App">
@@ -89,6 +92,7 @@ function App() {
           <Route path="/admin/clientes" element={<AdminRoute><AdminClients /></AdminRoute>} />
           <Route path="/admin/comerciantes" element={<AdminRoute><AdminAdmins /></AdminRoute>} />
           <Route path="/admin/pedidos" element={<AdminRoute><AdminOrders /></AdminRoute>} />
+          <Route path="/cart" element={<Cart />} />
 
 
         </Routes>
