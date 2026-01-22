@@ -60,6 +60,9 @@ export const TopMenu = () => {
                   <NavDropdown.Item as={Link} to="/admin/dashboard">
                     Dashboard
                   </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/admin/pedidos">Pedidos</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/admin/clientes">Clientes</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/admin/comerciantes">Comerciantes</NavDropdown.Item>
                 </NavDropdown>
 
               )}
