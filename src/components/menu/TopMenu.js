@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./TopMenu.css";
 import { API_URL, isAuth, isAdmin } from "../../util/Util";
 
+
 export const TopMenu = () => {
   const [categories, setCategories] = useState([]);
   let navigate = useNavigate();
@@ -65,6 +66,9 @@ export const TopMenu = () => {
                   <NavDropdown.Item as={Link} to="/admin/dashboard">
                     Dashboard
                   </NavDropdown.Item>
+                  <Nav.Link as={Link} to="/admin/orders">
+                    📦 Pedidos
+                  </Nav.Link>
                   <NavDropdown.Item as={Link} to="/admin/pedidos">Pedidos</NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/admin/clientes">Clientes</NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/admin/comerciantes">Comerciantes</NavDropdown.Item>
