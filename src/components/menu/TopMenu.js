@@ -56,6 +56,12 @@ export const TopMenu = () => {
                 🛒 Carrito
               </Nav.Link>
 
+              <Nav.Link as={Link} to="/mis-pedidos">
+                🛒 Mis pedidos
+              </Nav.Link>
+
+
+
 
               {/* 🔴 SOLO ADMIN VE ESTO */}
               {isAdmin() && (

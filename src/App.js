@@ -33,6 +33,8 @@ import { AdminOrders } from "./components/admin/AdminOrders";
 
 import { Cart } from "./components/cart/Cart";
 
+import { MyOrders } from "./components/orders/MyOrders";
+
 
 function App() {
   return (
@@ -101,6 +103,10 @@ function App() {
               </AdminRoute>
             }
           />
+
+          <Route path="/mis-pedidos" element={<MyOrders />} />
+
+
 
 
         </Routes>
