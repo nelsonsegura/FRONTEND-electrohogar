@@ -84,7 +84,10 @@ export const Cart = () => {
 
             {cart.map((m, i) => (
                 <div key={i} className="border p-2 mb-2 d-flex justify-content-between">
-                    {m.name}
+                    <div>
+                        <b>{m.name}</b>
+                        <div>${m.price.toLocaleString("es-CO")}</div>
+                    </div>
                     <button
                         className="btn btn-danger btn-sm"
                         onClick={() => removeItem(i)}

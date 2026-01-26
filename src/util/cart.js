@@ -24,5 +24,5 @@ export const clearCart = () => {
 
 export const getTotal = () => {
     const cart = getCart();
-    return cart.reduce((sum, m) => sum + (m.price || 0), 0);
+    return cart.reduce((sum, p) => sum + p.price, 0);
 };

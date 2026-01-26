@@ -132,7 +132,13 @@ export const Movie = () => {
 
 
   const handleAddCart = () => {
-    addToCart(movie);
+    addToCart({
+      id: movie.id,
+      name: movie.name,
+      price: movie.price,
+      image: movie.imageLink
+    });
+
     showMessage("Agregado", "Producto agregado al carrito", "success", "OK");
   };
 
@@ -158,6 +164,9 @@ export const Movie = () => {
         <div className="content">
           <h1>{movie.name}</h1>
           <p>{movie.description}</p>
+          <h3 className="text-success mt-2">
+            $ {movie.price?.toLocaleString("es-CO")}
+          </h3>
 
           {/* ================= BOTONES ADMIN ================= */}
           {isAdmin() && (
