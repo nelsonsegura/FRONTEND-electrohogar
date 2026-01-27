@@ -6,18 +6,29 @@ export const MovieEdit = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
+    const [categories, setCategories] = useState([]);
+    const [categoryId, setCategoryId] = useState("");
+
     const [formData, setFormData] = useState({
         name: "",
         description: "",
         trailerLink: "",
         imageLink: "",
+        price: "",
         categories: null,
         staffList: null,
     });
 
     useEffect(() => {
         loadMovie();
+        loadCategories();
     }, []);
+
+    const loadCategories = async () => {
+        const res = await fetch(API_URL + "category");
+        const data = await res.json();
+        setCategories(data);
+    };
 
     const loadMovie = async () => {
         let response = await fetch(API_URL + "movie/" + id);
@@ -28,17 +39,30 @@ export const MovieEdit = () => {
             description: response.description || "",
             trailerLink: response.trailerLink || "",
             imageLink: response.imageLink || "",
+            price: response.price || "",
             categories: response.categories || null,
             staffList: response.staffList || null,
         });
+
+        // Asignar la categoría actual
+        setCategoryId(response.categories?.[0]?.id || "");
     };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const body = {
+            ...formData,
+            price: parseFloat(formData.price),
+            category: {
+                id: categoryId
+            }
+        };
 
         try {
             const response = await fetch(API_URL + "movie/" + id, {
@@ -47,7 +71,7 @@ export const MovieEdit = () => {
                     "Content-Type": "application/json",
                     Authorization: "Bearer " + getToken(),
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(body),
             });
 
             const data = await response.json();
@@ -63,12 +87,12 @@ export const MovieEdit = () => {
         }
     };
 
-
     return (
         <div className="container">
             <h2>Editar producto</h2>
 
             <form onSubmit={handleSubmit}>
+
                 <input
                     name="name"
                     value={formData.name}
@@ -82,6 +106,16 @@ export const MovieEdit = () => {
                     name="description"
                     value={formData.description}
                     placeholder="Descripción"
+                    className="form-control mb-2"
+                    onChange={handleChange}
+                    required
+                />
+
+                <input
+                    name="price"
+                    type="number"
+                    value={formData.price}
+                    placeholder="Precio"
                     className="form-control mb-2"
                     onChange={handleChange}
                     required
@@ -104,9 +138,23 @@ export const MovieEdit = () => {
                     required
                 />
 
+                {/* 🔥 Selector de categoría */}
+                <select
+                    className="form-control mb-3"
+                    value={categoryId}
+                    onChange={(e) => setCategoryId(e.target.value)}
+                    required
+                >
+                    <option value="">Seleccione una categoría</option>
+                    {categories.map(c => (
+                        <option key={c.id} value={c.id}>{c.name}</option>
+                    ))}
+                </select>
+
                 <button className="btn btn-warning w-100">
                     Actualizar producto
                 </button>
+
             </form>
         </div>
     );

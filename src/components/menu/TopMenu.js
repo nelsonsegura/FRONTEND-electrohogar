@@ -8,7 +8,6 @@ import { Link, useNavigate } from "react-router-dom";
 import "./TopMenu.css";
 import { API_URL, isAuth, isAdmin } from "../../util/Util";
 
-
 export const TopMenu = () => {
   const [categories, setCategories] = useState([]);
   let navigate = useNavigate();
@@ -48,6 +47,23 @@ export const TopMenu = () => {
                 Descuentos
               </Nav.Link>
 
+              <NavDropdown title="Categorías">
+                <NavDropdown.Item as={Link} to="/movies">
+                  Todas
+                </NavDropdown.Item>
+
+                {categories.map(c => (
+                  <NavDropdown.Item
+                    key={c.id}
+                    as={Link}
+                    to={`/movies?category=${c.id}`}
+                  >
+                    {c.name}
+                  </NavDropdown.Item>
+                ))}
+              </NavDropdown>
+
+
               <Nav.Link as={Link} to="/bienvenidos">
                 Contactos
               </Nav.Link>
@@ -57,33 +73,33 @@ export const TopMenu = () => {
               </Nav.Link>
 
               <Nav.Link as={Link} to="/mis-pedidos">
-                🛒 Mis pedidos
+                🧾 Mis pedidos
               </Nav.Link>
 
-
-
-
-              {/* 🔴 SOLO ADMIN VE ESTO */}
+              {/* 🔴 SOLO ADMIN */}
               {isAdmin() && (
                 <NavDropdown title="Administración">
                   <NavDropdown.Item as={Link} to="/admin/movies">
-                    Listado Productos
+                    📦 Productos
                   </NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/admin/dashboard">
-                    Dashboard
+                    📊 Dashboard
                   </NavDropdown.Item>
-                  <Nav.Link as={Link} to="/admin/orders">
-                    📦 Pedidos
-                  </Nav.Link>
-                  <NavDropdown.Item as={Link} to="/admin/pedidos">Pedidos</NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/admin/clientes">Clientes</NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/admin/comerciantes">Comerciantes</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/admin/orders">
+                    🚚 Pedidos
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/admin/clientes">
+                    👥 Clientes
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/admin/comerciantes">
+                    🧑‍💼 Comerciantes
+                  </NavDropdown.Item>
                 </NavDropdown>
-
               )}
 
-
-              <Nav.Link onClick={logOut}>LOG OUT</Nav.Link>
+              <Nav.Link onClick={logOut}>
+                LOG OUT
+              </Nav.Link>
 
             </Nav>
           </Navbar.Collapse>
