@@ -14,6 +14,18 @@ export const AdminOrders = () => {
         setOrders(data.reverse());
     };
 
+    // 🔥 ELIMINAR PEDIDO
+    const deleteOrder = async (id) => {
+        if (!window.confirm("¿Eliminar este pedido?")) return;
+
+        await fetch(API_URL + "order/" + id, {
+            method: "DELETE"
+        });
+
+        load(); // 👈 recargar tabla
+    };
+
+    // CAMBIAR ESTADO
     const changeStatus = async (id, status) => {
         await fetch(API_URL + `order/${id}/${status}`, { method: "PUT" });
         load();
@@ -56,26 +68,34 @@ export const AdminOrders = () => {
                             <td>
                                 {o.status === "PENDING" && (
                                     <>
-                                        <button onClick={() => changeStatus(o.id, "APPROVED")}
+                                        <button
+                                            onClick={() => changeStatus(o.id, "APPROVED")}
                                             className="btn btn-sm btn-success me-1">
                                             ✔ Aprobar
                                         </button>
-                                        <button onClick={() => changeStatus(o.id, "REJECTED")}
-                                            className="btn btn-sm btn-danger">
+
+                                        <button
+                                            onClick={() => changeStatus(o.id, "REJECTED")}
+                                            className="btn btn-sm btn-danger me-1">
                                             ❌ Rechazar
                                         </button>
                                     </>
                                 )}
 
                                 {o.status === "APPROVED" && (
-                                    <button onClick={() => changeStatus(o.id, "SHIPPED")}
-                                        className="btn btn-sm btn-primary">
+                                    <button
+                                        onClick={() => changeStatus(o.id, "SHIPPED")}
+                                        className="btn btn-sm btn-primary me-1">
                                         🚚 Enviar
                                     </button>
                                 )}
 
-                                {o.status === "SHIPPED" && "✔ Enviado"}
-                                {o.status === "REJECTED" && "❌ Cancelado"}
+                                {/* 🔴 BOTÓN ELIMINAR (SIEMPRE) */}
+                                <button
+                                    onClick={() => deleteOrder(o.id)}
+                                    className="btn btn-sm btn-outline-danger">
+                                    🗑 Eliminar
+                                </button>
                             </td>
                         </tr>
                     ))}
