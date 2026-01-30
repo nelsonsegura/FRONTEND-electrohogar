@@ -1,62 +1,47 @@
 import { useEffect, useState } from "react";
 import { API_URL, showMessage } from "../../util/Util";
 
-export const MyProfile = () => {
+export const MyProfileAdmin = () => {
     const auth = JSON.parse(localStorage.getItem("authData"));
-    const [client, setClient] = useState({});
+    const [admin, setAdmin] = useState({});
 
     useEffect(() => {
         loadProfile();
     }, []);
 
     const loadProfile = async () => {
-        const res = await fetch(API_URL + "client/" + auth.id);
+        const res = await fetch(API_URL + "admin/" + auth.id);
         const data = await res.json();
-        setClient(data);
+        setAdmin(data);
     };
 
-
-    // 👇 AQUÍ VA
-    if (!client.id) {
-        return <p>Cargando perfil...</p>;
+    // ⏳ Loader
+    if (!admin.id) {
+        return <p>Cargando perfil de administrador...</p>;
     }
 
     const handleChange = (e) => {
-        setClient({ ...client, [e.target.name]: e.target.value });
+        setAdmin({ ...admin, [e.target.name]: e.target.value });
     };
 
     const updateProfile = async () => {
-        const payload = {
-            ...client,
-            id: auth.id   // 🔥 ESTO ES LO QUE TE FALTABA
-        };
-
-        await fetch(API_URL + "client", {
+        await fetch(API_URL + "admin", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
+            body: JSON.stringify(admin),
         });
 
-        showMessage("OK", "Perfil actualizado", "success");
-    };
-
-
-    const deleteAccount = async () => {
-        if (!window.confirm("¿Eliminar tu cuenta definitivamente?")) return;
-
-        await fetch(API_URL + "client/" + auth.id, { method: "DELETE" });
-        localStorage.clear();
-        window.location.href = "/";
+        showMessage("OK", "Perfil de administrador actualizado", "success");
     };
 
     return (
         <div className="container mt-4">
-            <h3>Mi perfil</h3>
+            <h3>Mi perfil (Administrador)</h3>
 
             <input
                 className="form-control mb-2"
                 name="name"
-                value={client.name || ""}
+                value={admin.name || ""}
                 onChange={handleChange}
                 placeholder="Nombre"
             />
@@ -64,41 +49,35 @@ export const MyProfile = () => {
             <input
                 className="form-control mb-2"
                 name="lastName"
-                value={client.lastName || ""}
+                value={admin.lastName || ""}
                 onChange={handleChange}
                 placeholder="Apellido"
             />
-
-
-
             <input
                 type="date"
                 className="form-control mb-2"
                 name="birthDate"
-                value={client.birthDate || ""}
+                value={admin.birthDate || ""}
                 onChange={handleChange}
             />
+
             <input
                 className="form-control mb-2"
                 name="email"
-                value={client.email || ""}
+                value={admin.email || ""}
                 disabled
             />
 
             <input
                 className="form-control mb-3"
                 name="phone"
-                value={client.phone || ""}
+                value={admin.phone || ""}
                 onChange={handleChange}
                 placeholder="Teléfono"
             />
 
-            <button className="btn btn-primary w-100 mb-2" onClick={updateProfile}>
+            <button className="btn btn-primary w-100" onClick={updateProfile}>
                 Guardar cambios
-            </button>
-
-            <button className="btn btn-danger w-100" onClick={deleteAccount}>
-                Eliminar mi cuenta
             </button>
         </div>
     );

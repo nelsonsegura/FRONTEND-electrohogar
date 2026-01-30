@@ -91,9 +91,19 @@ export const TopMenu = () => {
               <Nav.Link as={Link} to="/mis-pedidos">
                 🧾 Mis pedidos
               </Nav.Link>
-              <Nav.Link as={Link} to="/perfil">
-                Mi cuenta
-              </Nav.Link>
+              {/* PERFIL SEGÚN ROL */}
+              {!isAdmin() && (
+                <Nav.Link as={Link} to="/perfil">
+                  Mi cuenta
+                </Nav.Link>
+              )}
+
+              {isAdmin() && (
+                <Nav.Link as={Link} to="/admin/profile">
+                  Mi perfil admin
+                </Nav.Link>
+              )}
+
 
               {/* 🔴 SOLO ADMIN */}
               {isAdmin() && (
@@ -113,11 +123,11 @@ export const TopMenu = () => {
                   <NavDropdown.Item as={Link} to="/admin/comerciantes">
                     🧑‍💼 Comerciantes
                   </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/admin/users">
+                    👤 Usuarios
+                  </NavDropdown.Item>
                 </NavDropdown>
               )}
-              <Nav.Link as={Link} to="/admin/users">
-                Usuarios
-              </Nav.Link>
 
               <Nav.Link onClick={logOut}>
                 LOG OUT

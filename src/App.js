@@ -39,6 +39,7 @@ import { MyProfile } from "./components/register/MyProfile";
 
 import { AdminUsers } from "./components/regadmin/AdminUsers";
 
+import { MyProfileAdmin } from "./components/regadmin/MyProfileAdmin";
 
 function App() {
   return (
@@ -113,6 +114,7 @@ function App() {
 
           <Route path="/perfil" element={<MyProfile />} />
           <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="/admin/profile" element={<MyProfileAdmin />} />
 
 
 
