@@ -23,6 +23,12 @@ export const clearCart = () => {
 };
 
 export const getTotal = () => {
-    const cart = getCart();
-    return cart.reduce((sum, p) => sum + p.price, 0);
+    return getCart().reduce((sum, m) => sum + getRealPrice(m), 0);
+};
+
+
+export const getRealPrice = (product) => {
+    if (!product.discount || product.discount === 0) return product.price;
+
+    return product.price - (product.price * product.discount / 100);
 };

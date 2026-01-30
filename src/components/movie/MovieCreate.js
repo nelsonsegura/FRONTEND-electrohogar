@@ -14,6 +14,7 @@ export const MovieCreate = () => {
         trailerLink: "",
         imageLink: "",
         price: "",
+        discount: "",
         categoryId: ""
     });
 
@@ -40,6 +41,7 @@ export const MovieCreate = () => {
             trailerLink: formData.trailerLink,
             imageLink: formData.imageLink,
             price: parseFloat(formData.price),
+            discount: parseInt(formData.discount) || 0,
             category: {
                 id: formData.categoryId
             }
@@ -79,6 +81,13 @@ export const MovieCreate = () => {
                 <input className="form-control mb-2" name="price" placeholder="Precio" type="number" onChange={handleChange} required />
                 <input className="form-control mb-2" name="trailerLink" placeholder="Link video" onChange={handleChange} />
                 <input className="form-control mb-2" name="imageLink" placeholder="Link imagen" onChange={handleChange} required />
+                <input
+                    type="number"
+                    className="form-control mb-2"
+                    name="discount"
+                    placeholder="Descuento %"
+                    onChange={handleChange}
+                />
 
                 <select className="form-control mb-3" name="categoryId" onChange={handleChange} required>
                     <option value="">Seleccione una categoría</option>

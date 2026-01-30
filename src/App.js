@@ -35,6 +35,10 @@ import { Cart } from "./components/cart/Cart";
 
 import { MyOrders } from "./components/orders/MyOrders";
 
+import { MyProfile } from "./components/register/MyProfile";
+
+import { AdminUsers } from "./components/regadmin/AdminUsers";
+
 
 function App() {
   return (
@@ -106,6 +110,9 @@ function App() {
 
           <Route path="/mis-pedidos" element={<MyOrders />} />
 
+
+          <Route path="/perfil" element={<MyProfile />} />
+          <Route path="/admin/users" element={<AdminUsers />} />
 
 
 

@@ -136,6 +136,7 @@ export const Movie = () => {
       id: movie.id,
       name: movie.name,
       price: movie.price,
+      discount: movie.discount,
       image: movie.imageLink
     });
 

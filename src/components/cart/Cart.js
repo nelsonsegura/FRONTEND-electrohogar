@@ -7,6 +7,7 @@ import {
 } from "../../util/cart";
 import { API_URL, getToken, showMessage } from "../../util/Util";
 import { useNavigate } from "react-router-dom";
+import { getRealPrice } from "../../util/cart";
 
 export const Cart = () => {
     const navigate = useNavigate();
@@ -86,8 +87,21 @@ export const Cart = () => {
                 <div key={i} className="border p-2 mb-2 d-flex justify-content-between">
                     <div>
                         <b>{m.name}</b>
-                        <div>${m.price.toLocaleString("es-CO")}</div>
+
+                        {m.discount > 0 ? (
+                            <>
+                                <div className="text-muted text-decoration-line-through">
+                                    ${m.price.toLocaleString("es-CO")}
+                                </div>
+                                <div className="fw-bold text-success">
+                                    ${getRealPrice(m).toLocaleString("es-CO")}
+                                </div>
+                            </>
+                        ) : (
+                            <div>${m.price.toLocaleString("es-CO")}</div>
+                        )}
                     </div>
+
                     <button
                         className="btn btn-danger btn-sm"
                         onClick={() => removeItem(i)}
@@ -104,7 +118,8 @@ export const Cart = () => {
             )}
 
 
-            <h4>Total: ${getTotal()}</h4>
+            <h4>Total: ${getTotal().toLocaleString("es-CO")}</h4>
+
 
             <h3 className="mt-4">📋 Datos de compra</h3>
 

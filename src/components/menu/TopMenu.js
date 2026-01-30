@@ -46,6 +46,22 @@ export const TopMenu = () => {
               <Nav.Link as={Link} to="/descuentos">
                 Descuentos
               </Nav.Link>
+              <Nav.Link as={Link} to="/movies?offers=true">
+                🔥 Ofertas
+              </Nav.Link>
+
+              <NavDropdown title="🔥 Ofertas por categoría">
+                {categories.map(c => (
+                  <NavDropdown.Item
+                    key={c.id}
+                    as={Link}
+                    to={`/movies?category=${c.id}&offers=true`}
+                  >
+                    {c.name}
+                  </NavDropdown.Item>
+                ))}
+              </NavDropdown>
+
 
               <NavDropdown title="Categorías">
                 <NavDropdown.Item as={Link} to="/movies">
@@ -75,6 +91,9 @@ export const TopMenu = () => {
               <Nav.Link as={Link} to="/mis-pedidos">
                 🧾 Mis pedidos
               </Nav.Link>
+              <Nav.Link as={Link} to="/perfil">
+                Mi cuenta
+              </Nav.Link>
 
               {/* 🔴 SOLO ADMIN */}
               {isAdmin() && (
@@ -96,6 +115,9 @@ export const TopMenu = () => {
                   </NavDropdown.Item>
                 </NavDropdown>
               )}
+              <Nav.Link as={Link} to="/admin/users">
+                Usuarios
+              </Nav.Link>
 
               <Nav.Link onClick={logOut}>
                 LOG OUT

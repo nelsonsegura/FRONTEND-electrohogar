@@ -15,6 +15,7 @@ export const MovieEdit = () => {
         trailerLink: "",
         imageLink: "",
         price: "",
+        discount: "",
         categories: null,
         staffList: null,
     });
@@ -40,6 +41,7 @@ export const MovieEdit = () => {
             trailerLink: response.trailerLink || "",
             imageLink: response.imageLink || "",
             price: response.price || "",
+            discount: response.discount || 0,   // 🔥
             categories: response.categories || null,
             staffList: response.staffList || null,
         });
@@ -59,6 +61,7 @@ export const MovieEdit = () => {
         const body = {
             ...formData,
             price: parseFloat(formData.price),
+            discount: parseInt(formData.discount) || 0,
             category: {
                 id: categoryId
             }
@@ -137,6 +140,14 @@ export const MovieEdit = () => {
                     onChange={handleChange}
                     required
                 />
+                <input
+                    type="number"
+                    className="form-control mb-2"
+                    name="discount"
+                    placeholder="Descuento %"
+                    onChange={handleChange}
+                />
+
 
                 {/* 🔥 Selector de categoría */}
                 <select
