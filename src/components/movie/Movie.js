@@ -17,6 +17,11 @@ export const Movie = () => {
   const [scoreId, setScoreId] = useState("");
   const [isActive, setIsActive] = useState(false);
 
+  const finalPrice = movie.discount
+    ? movie.price - (movie.price * movie.discount / 100)
+    : movie.price;
+
+
   useEffect(() => {
     setMovieId(params.id);
     getMovie();
@@ -145,84 +150,110 @@ export const Movie = () => {
 
 
   return (
-    <div className="movie-container">
-      <iframe
-        id="myVideo"
-        width="560"
-        height="515"
-        src={
-          !movie.trailerLink
-            ? "https://www.youtube-nocookie.com/embed/4Lp-Vc4i2QI"
-            : movie.trailerLink
-        }
-        title={movie.name}
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      ></iframe>
+    <div className="container mt-4">
+      <div className="row g-4">
 
-      <div className="main-container">
-        <div className="content">
-          <h1>{movie.name}</h1>
-          <p>{movie.description}</p>
-          <h3 className="text-success mt-2">
-            $ {movie.price?.toLocaleString("es-CO")}
-          </h3>
-
-          {/* ================= BOTONES ADMIN ================= */}
-          {isAdmin() && (
-            <div className="mb-3">
-              <Link
-                to={`/movies/edit/${movie.id}`}
-                className="btn btn-warning me-2"
-              >
-                Editar
-              </Link>
-
-              <button className="btn btn-danger" onClick={handleDelete}>
-                Eliminar
-              </button>
-            </div>
-          )}
-
-          <div className="staff-list">
-            {movie.staffList && movie.staffList.length > 0
-              ? movie.staffList.map((staff, idx) => (
-                <p key={idx}>
-                  {staff.name} {staff.lastName} ({staff.rol})
-                </p>
-              ))
-              : ""}
+        {/* VIDEO / IMAGEN */}
+        <div className="col-12 col-lg-6">
+          <div className="ratio ratio-16x9 shadow rounded overflow-hidden">
+            <iframe
+              src={
+                !movie.trailerLink
+                  ? "https://www.youtube-nocookie.com/embed/4Lp-Vc4i2QI"
+                  : movie.trailerLink
+              }
+              title={movie.name}
+              allowFullScreen
+            />
           </div>
+        </div>
 
-          <div className="category-list">
-            {movie.categories && movie.categories.length > 0
-              ? movie.categories.map((staff, idx) => (
-                <p key={idx}>{staff.name}</p>
-              ))
-              : ""}
-          </div>
+        {/* INFO PRODUCTO */}
+        <div className="col-12 col-lg-6">
+          <div className="card shadow-sm h-100">
+            <div className="card-body d-flex flex-column">
 
-          {/* ================= CLIENTE ================= */}
-          {!isAdmin() && (
-            <div className="mt-4">
-              <Link to="/pedidos">
-                <button className="inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white sm:w-auto">
-                  COMPRAR
-                </button>
+              <h2 className="fw-bold">{movie.name}</h2>
 
-                <button
-                  className="btn btn-primary mt-2"
-                  onClick={handleAddCart}
-                >
-                  Agregar al carrito
-                </button>
+              <p className="text-muted">
+                {movie.description}
+              </p>
 
-              </Link>
+              <div className="mt-2">
+                {movie.discount > 0 && (
+                  <div>
+                    <span className="text-muted text-decoration-line-through me-2">
+                      $ {movie.price?.toLocaleString("es-CO")}
+                    </span>
+
+                    <span className="badge bg-danger">
+                      -{movie.discount}%
+                    </span>
+                  </div>
+                )}
+
+                <h3 className="text-success fw-bold">
+                  $ {finalPrice?.toLocaleString("es-CO")}
+                </h3>
+              </div>
+
+
+              {/* CATEGORÍAS */}
+              <div className="mt-2">
+                {movie.categories?.map((c, idx) => (
+                  <span key={idx} className="badge bg-secondary me-1">
+                    {c.name}
+                  </span>
+                ))}
+              </div>
+
+              {/* STAFF */}
+              <div className="mt-3">
+                {movie.staffList?.map((s, idx) => (
+                  <div key={idx} className="text-sm text-muted">
+                    {s.name} {s.lastName} ({s.rol})
+                  </div>
+                ))}
+              </div>
+
+              {/* ESPACIO FLEX */}
+              <div className="mt-auto">
+
+                {/* ADMIN */}
+                {isAdmin() && (
+                  <div className="d-flex gap-2">
+                    <Link
+                      to={`/movies/edit/${movie.id}`}
+                      className="btn btn-warning"
+                    >
+                      ✏ Editar
+                    </Link>
+
+                    <button
+                      className="btn btn-danger"
+                      onClick={handleDelete}
+                    >
+                      🗑 Eliminar
+                    </button>
+                  </div>
+                )}
+
+                {/* CLIENTE */}
+                {!isAdmin() && (
+                  <button
+                    className="btn btn-primary w-100 mt-3"
+                    onClick={handleAddCart}
+                  >
+                    🛒 Agregar al carrito
+                  </button>
+                )}
+
+              </div>
             </div>
-          )}
+          </div>
         </div>
       </div>
     </div>
   );
+
 };

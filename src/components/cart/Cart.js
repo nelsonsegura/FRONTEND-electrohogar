@@ -84,32 +84,50 @@ export const Cart = () => {
             <h2>🛒 Carrito</h2>
 
             {cart.map((m, i) => (
-                <div key={i} className="border p-2 mb-2 d-flex justify-content-between">
-                    <div>
-                        <b>{m.name}</b>
+                <div
+                    key={i}
+                    className="border rounded p-2 mb-2 d-flex align-items-center justify-content-between shadow-sm"
+                >
+                    <div className="d-flex align-items-center gap-3">
 
-                        {m.discount > 0 ? (
-                            <>
-                                <div className="text-muted text-decoration-line-through">
-                                    ${m.price.toLocaleString("es-CO")}
-                                </div>
-                                <div className="fw-bold text-success">
-                                    ${getRealPrice(m).toLocaleString("es-CO")}
-                                </div>
-                            </>
-                        ) : (
-                            <div>${m.price.toLocaleString("es-CO")}</div>
-                        )}
+                        {/* IMAGEN */}
+                        <img
+                            src={m.image || "https://picsum.photos/seed/picsum/80/80"}
+                            alt={m.name}
+                            width="60"
+                            height="60"
+                            style={{ objectFit: "cover", borderRadius: "8px" }}
+                        />
+
+                        {/* INFO */}
+                        <div>
+                            <b>{m.name}</b>
+
+                            {m.discount > 0 ? (
+                                <>
+                                    <div className="text-muted text-decoration-line-through">
+                                        ${m.price.toLocaleString("es-CO")}
+                                    </div>
+                                    <div className="fw-bold text-success">
+                                        ${getRealPrice(m).toLocaleString("es-CO")}
+                                    </div>
+                                </>
+                            ) : (
+                                <div>${m.price.toLocaleString("es-CO")}</div>
+                            )}
+                        </div>
                     </div>
 
+                    {/* BOTÓN ELIMINAR */}
                     <button
-                        className="btn btn-danger btn-sm"
+                        className="btn btn-outline-danger btn-sm"
                         onClick={() => removeItem(i)}
                     >
                         ❌
                     </button>
                 </div>
             ))}
+
 
             {cart.length === 0 && (
                 <div className="alert alert-warning mt-3">

@@ -15,21 +15,23 @@ export const AdminDashboard = () => {
 
     const loadStats = async () => {
         try {
-            const [moviesRes, clientsRes, adminsRes] = await Promise.all([
+            const [moviesRes, clientsRes, adminsRes, ordersRes] = await Promise.all([
                 fetch(API_URL + "movie"),
                 fetch(API_URL + "client"),
                 fetch(API_URL + "admin"),
+                fetch(API_URL + "order"),   // 👈 FALTABA ESTE
             ]);
 
             const movies = await moviesRes.json();
             const clients = await clientsRes.json();
             const admins = await adminsRes.json();
+            const orders = await ordersRes.json();
 
             setStats({
                 products: movies.length || 0,
                 clients: clients.length || 0,
                 admins: admins.length || 0,
-                orders: 0, // luego lo conectamos
+                orders: orders.length || 0,   // 👈 AHORA SÍ
             });
         } catch (error) {
             console.error("Error cargando dashboard", error);

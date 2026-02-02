@@ -85,51 +85,78 @@ export const Login = () => {
   };
 
   return (
-    <div className="row justify-content-center">
-      <div className="col-8 col-sm-8 col-md-4 col-lg-3">
-        <Form onSubmit={handleSubmit}>
+    <div className="container-fluid min-vh-100 d-flex align-items-center justify-content-center bg-light">
+      <div className="col-11 col-sm-8 col-md-5 col-lg-4 col-xl-3">
+        <div className="card shadow-lg border-0 rounded-4">
+          <div className="card-body p-4">
 
-          <Form.Group className="mb-3">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Ingrese su email"
-              name="user"
-              onChange={handleChange}
-              required
-            />
-          </Form.Group>
+            <h3 className="text-center fw-bold mb-3">
+              🔐 Iniciar sesión
+            </h3>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Contraseña</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Ingrese su contraseña"
-              name="password"
-              onChange={handleChange}
-              required
-            />
-          </Form.Group>
+            <p className="text-center text-muted mb-4">
+              Accede a tu cuenta para continuar
+            </p>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Tipo de cuenta</Form.Label>
-            <Form.Select name="tipo" onChange={handleChange}>
-              <option value="client">Cliente</option>
-              <option value="admin">Comerciante</option>
-            </Form.Select>
-          </Form.Group>
+            <Form onSubmit={handleSubmit}>
 
-          <Button variant="primary" type="submit" className="w-100">
-            INGRESAR
-          </Button>
-        </Form>
+              <Form.Group className="mb-3">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="correo@ejemplo.com"
+                  name="user"
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
 
-        <div className="mt-3 text-center">
-          <Link to="/register">Registro cliente</Link>
-          <br />
-          <Link to="/regadmin">Registro comerciante</Link>
+              <Form.Group className="mb-3">
+                <Form.Label>Contraseña</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="••••••••"
+                  name="password"
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-4">
+                <Form.Label>Tipo de cuenta</Form.Label>
+                <Form.Select name="tipo" onChange={handleChange}>
+                  <option value="client">Cliente</option>
+                  <option value="admin">Comerciante</option>
+                </Form.Select>
+              </Form.Group>
+
+              <Button variant="primary" type="submit" className="w-100 py-2">
+                Entrar
+              </Button>
+            </Form>
+
+            <hr className="my-4" />
+
+            <div className="text-center small">
+              <div>
+                ¿No tienes cuenta?
+                <Link to="/register" className="ms-1">
+                  Regístrate
+                </Link>
+              </div>
+
+              <div className="mt-2">
+                ¿Eres comerciante?
+                <Link to="/regadmin" className="ms-1">
+                  Crear cuenta
+                </Link>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
   );
+
 };

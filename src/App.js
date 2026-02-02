@@ -11,8 +11,8 @@ import { NotFound } from "./components/notFound/NotFound";
 import { Register } from "./components/register/Register";
 import { Sidebar } from "./components/sidebar/Sidebar";
 import { Cmovie } from "./components/cmovie/Cmovie";
-import Descuentos from './components/descuentos/descuentos';
-import Pedidos from './components/pedidos/pedidos';
+/* import Descuentos from './components/descuentos/descuentos';
+import Pedidos from './components/pedidos/pedidos'; */
 import Bienvenido from './components/bienvenido/bienvenido';
 import Bienvenidos from './components/bienvenidos/bienvenidos';
 import { Regadmin } from "./components/regadmin/Regadmin";
@@ -54,8 +54,8 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/cmovie" element={<Cmovie />} />
-          <Route path="/descuentos" element={<Descuentos />} />
-          <Route path="/pedidos" element={<Pedidos />} />
+          {/*           <Route path="/descuentos" element={<Descuentos />} />
+          <Route path="/pedidos" element={<Pedidos />} /> */}
           <Route path="/bienvenido" element={<Bienvenido />} />
           <Route path="/bienvenidos" element={<Bienvenidos />} />
           <Route path="/regadmin" element={<Regadmin />} />

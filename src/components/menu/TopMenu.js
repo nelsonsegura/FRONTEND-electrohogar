@@ -35,102 +35,94 @@ export const TopMenu = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
 
-              <Nav.Link as={Link} to="/bienvenido">
-                Inicio
-              </Nav.Link>
-
-              <Nav.Link as={Link} to="/movies">
-                Productos
-              </Nav.Link>
-
-              <Nav.Link as={Link} to="/descuentos">
-                Descuentos
-              </Nav.Link>
-              <Nav.Link as={Link} to="/movies?offers=true">
-                🔥 Ofertas
-              </Nav.Link>
-
-              <NavDropdown title="🔥 Ofertas por categoría">
-                {categories.map(c => (
-                  <NavDropdown.Item
-                    key={c.id}
-                    as={Link}
-                    to={`/movies?category=${c.id}&offers=true`}
-                  >
-                    {c.name}
-                  </NavDropdown.Item>
-                ))}
-              </NavDropdown>
-
-
-              <NavDropdown title="Categorías">
-                <NavDropdown.Item as={Link} to="/movies">
-                  Todas
-                </NavDropdown.Item>
-
-                {categories.map(c => (
-                  <NavDropdown.Item
-                    key={c.id}
-                    as={Link}
-                    to={`/movies?category=${c.id}`}
-                  >
-                    {c.name}
-                  </NavDropdown.Item>
-                ))}
-              </NavDropdown>
-
-
-              <Nav.Link as={Link} to="/bienvenidos">
-                Contactos
-              </Nav.Link>
-
-              <Nav.Link as={Link} to="/cart">
-                🛒 Carrito
-              </Nav.Link>
-
-              <Nav.Link as={Link} to="/mis-pedidos">
-                🧾 Mis pedidos
-              </Nav.Link>
-              {/* PERFIL SEGÚN ROL */}
+              {/* =================== CLIENTE =================== */}
               {!isAdmin() && (
-                <Nav.Link as={Link} to="/perfil">
-                  Mi cuenta
-                </Nav.Link>
+                <>
+                  <Nav.Link as={Link} to="/bienvenido">
+                    Inicio
+                  </Nav.Link>
+
+                  <Nav.Link as={Link} to="/movies">
+                    Productos
+                  </Nav.Link>
+
+                  <NavDropdown title="Categorías">
+                    <NavDropdown.Item as={Link} to="/movies">
+                      Todas
+                    </NavDropdown.Item>
+                    {categories.map(c => (
+                      <NavDropdown.Item
+                        key={c.id}
+                        as={Link}
+                        to={`/movies?category=${c.id}`}
+                      >
+                        {c.name}
+                      </NavDropdown.Item>
+                    ))}
+                  </NavDropdown>
+
+                  <Nav.Link as={Link} to="/movies?offers=true">
+                    🔥 Ofertas
+                  </Nav.Link>
+
+                  <Nav.Link as={Link} to="/cart">
+                    🛒 Carrito
+                  </Nav.Link>
+
+                  <Nav.Link as={Link} to="/mis-pedidos">
+                    🧾 Mis pedidos
+                  </Nav.Link>
+
+                  <Nav.Link as={Link} to="/perfil">
+                    Mi cuenta
+                  </Nav.Link>
+
+                  <Nav.Link as={Link} to="/bienvenidos">
+                    Contactos
+                  </Nav.Link>
+
+                </>
               )}
 
+              {/* =================== ADMIN =================== */}
               {isAdmin() && (
-                <Nav.Link as={Link} to="/admin/profile">
-                  Mi perfil admin
-                </Nav.Link>
-              )}
-
-
-              {/* 🔴 SOLO ADMIN */}
-              {isAdmin() && (
-                <NavDropdown title="Administración">
-                  <NavDropdown.Item as={Link} to="/admin/movies">
-                    📦 Productos
-                  </NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/admin/dashboard">
+                <>
+                  <Nav.Link as={Link} to="/movies">
+                    inicio
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/admin/dashboard">
                     📊 Dashboard
-                  </NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/admin/orders">
+                  </Nav.Link>
+
+                  <Nav.Link as={Link} to="/admin/movies">
+                    📦 Productos
+                  </Nav.Link>
+
+                  <Nav.Link as={Link} to="/admin/orders">
                     🚚 Pedidos
-                  </NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/admin/clientes">
+                  </Nav.Link>
+
+                  <Nav.Link as={Link} to="/admin/clientes">
                     👥 Clientes
-                  </NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/admin/comerciantes">
+                  </Nav.Link>
+
+                  <Nav.Link as={Link} to="/admin/comerciantes">
                     🧑‍💼 Comerciantes
-                  </NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/admin/users">
+                  </Nav.Link>
+
+                  <Nav.Link as={Link} to="/admin/users">
                     👤 Usuarios
-                  </NavDropdown.Item>
-                </NavDropdown>
+                  </Nav.Link>
+
+                  <Nav.Link as={Link} to="/admin/profile">
+                    Mi perfil admin
+                  </Nav.Link>
+                </>
               )}
 
+              {/* =================== COMÚN =================== */}
               <Nav.Link onClick={logOut}>
-                LOG OUT
+                Logout
               </Nav.Link>
 
             </Nav>
@@ -139,4 +131,5 @@ export const TopMenu = () => {
       )}
     </Navbar>
   );
+
 };
