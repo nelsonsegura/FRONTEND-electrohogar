@@ -29,8 +29,8 @@ export const Register = () => {
     if (response.status === true) {
       icon = "success";
       confirmButtonText = "Registro completado";
-  }
-  const message = response.message;
+    }
+    const message = response.message;
     showMessage(title, message, icon, confirmButtonText);
   };
 
@@ -48,76 +48,113 @@ export const Register = () => {
   };
 
   return (
-    <div className="container">
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formBasicName">
-          <Form.Label>Nombres</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Nombres"
-            name="name"
-            onChange={handleChange}
-          />
-        </Form.Group>
+    <div className="container py-5">
+      <div className="row justify-content-center">
+        <div className="col-12 col-sm-10 col-md-8 col-lg-6">
 
-        <Form.Group className="mb-3" controlId="formBasicLastName">
-          <Form.Label>Apellidos</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Apellidos"
-            name="lastName"
-            onChange={handleChange}
-          />
-        </Form.Group>
+          <div className="card shadow-lg border-0 rounded-4">
+            <div className="card-body p-4 p-md-5">
 
-        <Form.Group className="mb-3" controlId="formBasicBirhtDate">
-          <Form.Label>Fecha de nacimiento</Form.Label>
-          <Form.Control
-            type="date"
-            placeholder="Fecha de nacimiento"
-            name="birthDate"
-            onChange={handleChange}
-          />
-        </Form.Group>
+              <h3 className="text-center mb-4 fw-bold">
+                📝 Crear cuenta
+              </h3>
 
-        <Form.Group className="mb-3" controlId="formBasicPhone">
-          <Form.Label>Celular</Form.Label>
-          <Form.Control
-            type="number"
-            placeholder="Teléfono de contacto"
-            name="phone"
-            onChange={handleChange}
-          />
-        </Form.Group>
+              <Form onSubmit={handleSubmit}>
 
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter email"
-            name="email"
-            onChange={handleChange}
-          />
-          <Form.Text className="text-muted">
-            No compartiremos el email con nadie más
-          </Form.Text>
-        </Form.Group>
+                <div className="row">
+                  <div className="col-md-6 mb-3">
+                    <Form.Label>Nombres</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Nombres"
+                      name="name"
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Contraseña</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Registra tu contraseña"
-            name="password"
-            onChange={handleChange}
-          />
-        </Form.Group>
+                  <div className="col-md-6 mb-3">
+                    <Form.Label>Apellidos</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Apellidos"
+                      name="lastName"
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                </div>
 
-        <Button variant="primary" type="submit">
-          REGISTRARSE
-        </Button>
-      </Form>
-      <Link to="/">Ya tengo una cuenta</Link>
+                <div className="row">
+                  <div className="col-md-6 mb-3">
+                    <Form.Label>Fecha de nacimiento</Form.Label>
+                    <Form.Control
+                      type="date"
+                      name="birthDate"
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+
+                  <div className="col-md-6 mb-3">
+                    <Form.Label>Celular</Form.Label>
+                    <Form.Control
+                      type="tel"
+                      placeholder="3001234567"
+                      name="phone"
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="correo@ejemplo.com"
+                    name="email"
+                    onChange={handleChange}
+                    required
+                  />
+                  <Form.Text className="text-muted">
+                    Nunca compartiremos tu correo.
+                  </Form.Text>
+                </Form.Group>
+
+                <Form.Group className="mb-4">
+                  <Form.Label>Contraseña</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Mínimo 6 caracteres"
+                    name="password"
+                    onChange={handleChange}
+                    required
+                  />
+                </Form.Group>
+
+                <Button
+                  variant="primary"
+                  type="submit"
+                  className="w-100 py-2 fw-bold"
+                >
+                  REGISTRARSE
+                </Button>
+              </Form>
+
+              <div className="text-center mt-4">
+                <span className="text-muted">¿Ya tienes cuenta?</span><br />
+                <Link to="/" className="fw-bold">
+                  Iniciar sesión
+                </Link>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
   );
+
 };

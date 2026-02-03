@@ -13,8 +13,8 @@ import { Sidebar } from "./components/sidebar/Sidebar";
 import { Cmovie } from "./components/cmovie/Cmovie";
 /* import Descuentos from './components/descuentos/descuentos';
 import Pedidos from './components/pedidos/pedidos'; */
-import Bienvenido from './components/bienvenido/bienvenido';
-import Bienvenidos from './components/bienvenidos/bienvenidos';
+import { About } from './components/bienvenido/bienvenido';
+import { Contact } from './components/bienvenidos/bienvenidos';
 import { Regadmin } from "./components/regadmin/Regadmin";
 
 
@@ -56,8 +56,9 @@ function App() {
           <Route path="/cmovie" element={<Cmovie />} />
           {/*           <Route path="/descuentos" element={<Descuentos />} />
           <Route path="/pedidos" element={<Pedidos />} /> */}
-          <Route path="/bienvenido" element={<Bienvenido />} />
-          <Route path="/bienvenidos" element={<Bienvenidos />} />
+          <Route path="/bienvenido" element={<About />} />
+          <Route path="/bienvenidos" element={<Contact />} />
+
           <Route path="/regadmin" element={<Regadmin />} />
 
           <Route

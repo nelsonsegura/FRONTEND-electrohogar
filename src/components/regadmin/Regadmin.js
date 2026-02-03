@@ -69,88 +69,129 @@ export const Regadmin = () => {
   };
 
   return (
-    <div className="container">
-      <Form onSubmit={handleSubmit}>
+    <div className="container py-5">
+      <div className="row justify-content-center">
+        <div className="col-12 col-sm-10 col-md-8 col-lg-6">
 
-        <Form.Group className="mb-3">
-          <Form.Label>Nombres</Form.Label>
-          <Form.Control
-            type="text"
-            name="name"
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
+          <div className="card shadow-lg border-0 rounded-4">
+            <div className="card-body p-4 p-md-5">
 
-        <Form.Group className="mb-3">
-          <Form.Label>Apellidos</Form.Label>
-          <Form.Control
-            type="text"
-            name="lastName"
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
+              <h3 className="text-center mb-2 fw-bold">
+                🧑‍💼 Registro de comerciante
+              </h3>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Fecha de nacimiento</Form.Label>
-          <Form.Control
-            type="date"
-            name="birthDate"
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
+              <p className="text-center text-muted mb-4">
+                Acceso exclusivo para administradores de la tienda
+              </p>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Celular</Form.Label>
-          <Form.Control
-            type="number"
-            name="phone"
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
+              <Form onSubmit={handleSubmit}>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            name="email"
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
+                <div className="row">
+                  <div className="col-md-6 mb-3">
+                    <Form.Label>Nombres</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="name"
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Contraseña</Form.Label>
-          <Form.Control
-            type="password"
-            name="password"
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
+                  <div className="col-md-6 mb-3">
+                    <Form.Label>Apellidos</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="lastName"
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                </div>
 
-        {/* 🔐 CLAVE DE COMERCIANTE */}
-        <Form.Group className="mb-3">
-          <Form.Label>Clave de comerciante</Form.Label>
-          <Form.Control
-            type="password"
-            name="secretKey"
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
+                <div className="row">
+                  <div className="col-md-6 mb-3">
+                    <Form.Label>Fecha de nacimiento</Form.Label>
+                    <Form.Control
+                      type="date"
+                      name="birthDate"
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
 
-        <Button variant="primary" type="submit" className="w-100">
-          REGISTRARSE
-        </Button>
-      </Form>
+                  <div className="col-md-6 mb-3">
+                    <Form.Label>Celular</Form.Label>
+                    <Form.Control
+                      type="tel"
+                      placeholder="3001234567"
+                      name="phone"
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                </div>
 
-      <div className="mt-3 text-center">
-        <Link to="/">Ya tengo una cuenta</Link>
+                <Form.Group className="mb-3">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="correo@empresa.com"
+                    name="email"
+                    onChange={handleChange}
+                    required
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Contraseña</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Mínimo 6 caracteres"
+                    name="password"
+                    onChange={handleChange}
+                    required
+                  />
+                </Form.Group>
+
+                {/* 🔐 CLAVE DE COMERCIANTE */}
+                <Form.Group className="mb-4">
+                  <Form.Label className="fw-bold text-danger">
+                    Clave de comerciante
+                  </Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Clave secreta"
+                    name="secretKey"
+                    onChange={handleChange}
+                    required
+                  />
+                  <Form.Text className="text-muted">
+                    Esta clave es entregada solo por el administrador del sistema.
+                  </Form.Text>
+                </Form.Group>
+
+                <Button
+                  variant="dark"
+                  type="submit"
+                  className="w-100 py-2 fw-bold"
+                >
+                  REGISTRAR COMERCIANTE
+                </Button>
+              </Form>
+
+              <div className="text-center mt-4">
+                <span className="text-muted">¿Ya tienes cuenta?</span><br />
+                <Link to="/" className="fw-bold">
+                  Iniciar sesión
+                </Link>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   );
+
 };
