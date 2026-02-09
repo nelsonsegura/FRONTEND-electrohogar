@@ -40,6 +40,8 @@ export const Login = () => {
 
         localStorage.setItem("authData", JSON.stringify(response));
 
+        window.dispatchEvent(new Event("storage")); // 👈 ESTA ES LA CLAVE
+
         if (response.role === "client") {
           navigate("/movies");
         } else {
@@ -47,20 +49,11 @@ export const Login = () => {
         }
 
       } else {
-        showMessage(
-          "Error",
-          "Credenciales no válidas",
-          "error",
-          "Reintentar"
-        );
+        showMessage("Error", "Credenciales no válidas", "error", "Reintentar");
       }
 
     } catch (error) {
-      showMessage(
-        "Error",
-        "Error de conexión con el servidor",
-        "error"
-      );
+      showMessage("Error", "Error de conexión con el servidor", "error");
     }
   };
 

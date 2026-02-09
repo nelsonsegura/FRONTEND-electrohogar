@@ -10,10 +10,22 @@ import { API_URL, isAuth, isAdmin } from "../../util/Util";
 
 export const TopMenu = () => {
   const [categories, setCategories] = useState([]);
+  const [auth, setAuth] = useState(isAuth()); // 👈 ESTADO REACTIVO
   let navigate = useNavigate();
 
   useEffect(() => {
     getCategoriesAsync();
+
+    // 👂 Escuchar cambios de login/logout
+    const onStorage = () => {
+      setAuth(isAuth());
+    };
+
+    window.addEventListener("storage", onStorage);
+
+    return () => {
+      window.removeEventListener("storage", onStorage);
+    };
   }, []);
 
   const getCategoriesAsync = async () => {
@@ -24,12 +36,13 @@ export const TopMenu = () => {
 
   const logOut = () => {
     localStorage.clear();
+    setAuth(false);
     navigate("/");
   };
 
   return (
     <Navbar bg="light" expand="lg">
-      {isAuth() && (
+      {auth && (   // 👈 ya no isAuth()
         <Container>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
